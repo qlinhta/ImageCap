@@ -10,7 +10,7 @@ import torchvision.transforms as transforms
 """
 python -m spacy download en
 """
-spacy_eng = spacy.load("en")
+spacy_eng = spacy.load("en_core_web_sm")
 
 
 class Vocabulary:
@@ -97,7 +97,7 @@ class MyCollate:
         return imgs, targets
 
 
-def get_loader(
+def loader(
         root_folder,
         annotation_file,
         transform,
@@ -127,7 +127,7 @@ if __name__ == "__main__":
         [transforms.Resize((224, 224)), transforms.ToTensor(), ]
     )
 
-    loader, dataset = get_loader(
+    loader, dataset = loader(
         "flickr8k/images/", "flickr8k/captions.txt", transform=transform
     )
 
