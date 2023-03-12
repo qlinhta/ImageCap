@@ -23,7 +23,7 @@ class Vocabulary:
         return len(self.itos)
 
     @staticmethod
-    def tokenizer_eng(text):
+    def tokenizer(text):
         return [tok.text.lower() for tok in spacy_eng.tokenizer(text)]
 
     def build_vocabulary(self, sentence_list):
@@ -31,7 +31,7 @@ class Vocabulary:
         idx = 4
 
         for sentence in sentence_list:
-            for word in self.tokenizer_eng(sentence):
+            for word in self.tokenizer(sentence):
                 if word not in frequencies:
                     frequencies[word] = 1
 
@@ -44,7 +44,7 @@ class Vocabulary:
                     idx += 1
 
     def numericalize(self, text):
-        tokenized_text = self.tokenizer_eng(text)
+        tokenized_text = self.tokenizer(text)
 
         return [
             self.stoi[token] if token in self.stoi else self.stoi["<UNK>"]
